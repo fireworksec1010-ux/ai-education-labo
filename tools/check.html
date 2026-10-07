@@ -1,0 +1,15 @@
+<!doctype html><meta charset="utf-8"><body><pre id="o"></pre>
+<script src="../data/i18n.js"></script><script src="../data/schools.js"></script>
+<script>
+var out=[], L=["ja","en","zh"], ids={};
+SCHOOLS.forEach(function(s){
+  if(ids[s.id]) out.push("DUP "+s.id); ids[s.id]=1;
+  ["name","pref","programs","desc","englishNote"].forEach(function(k){L.forEach(function(l){ if(!s[k]||!s[k][l]) out.push("MISSING "+s.id+" "+k+"."+l);});});
+  s.fields.forEach(function(f){ if(!I18N.ja.fieldNames[f]) out.push("BADFIELD "+s.id+" "+f);});
+  L.forEach(function(l){ if(!I18N[l].typeNames[s.type]) out.push("BADTYPE "+s.id); if(!I18N[l].regionNames[s.region]) out.push("BADREGION "+s.id);});
+});
+var keys=Object.keys(I18N.ja); L.forEach(function(l){keys.forEach(function(k){ if(I18N[l][k]===undefined) out.push("I18N missing "+l+"."+k);});});
+out.push("TOTAL "+SCHOOLS.length+" / english "+SCHOOLS.filter(function(s){return s.english}).length);
+var c={}; SCHOOLS.forEach(function(s){c[s.type]=(c[s.type]||0)+1}); out.push(JSON.stringify(c));
+document.getElementById("o").textContent=out.join("\n");
+</script>
