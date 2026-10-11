@@ -9,6 +9,22 @@
   var FIELD_ORDER = ["prog", "ai", "robot", "semi", "security", "space", "design", "startup"];
   var REGION_ORDER = ["hokkaido-tohoku", "kanto", "chubu", "kinki", "chugoku-shikoku", "kyushu-okinawa", "online"];
 
+  // 分野アイコン（線画SVG）
+  var ICON_PATHS = {
+    prog: '<path d="M8 7l-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16"/>',
+    ai: '<circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/>',
+    robot: '<rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01M9.5 16h5M2 12v3M22 12v3"/><circle cx="12" cy="3.5" r="1"/>',
+    semi: '<rect x="7" y="7" width="10" height="10" rx="1.5"/><rect x="10" y="10" width="4" height="4"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/>',
+    security: '<path d="M12 3l8 3v6c0 5-3.4 8.2-8 9-4.6-.8-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>',
+    space: '<path d="M14 4c3.5 0 6 2.5 6 6l-7 7-6-6z"/><circle cx="15" cy="9" r="1.5"/><path d="M7 11l-3 1-1 3 4 0M13 17l-1 3-3 1 0-4M5 19l2-2"/>',
+    design: '<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/>',
+    startup: '<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>'
+  };
+  function icon(f) {
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+      ICON_PATHS[f] + "</svg>";
+  }
+
   // 学校データに留学生向け情報（study-info.js）をまとめる
   var schools = (window.SCHOOLS || []).map(function (s) {
     s.study = (window.STUDY_INFO || {})[s.id] || { english: "none", tuition: null, scholarship: "univ", dorm: "check" };
@@ -205,6 +221,7 @@
 
     document.getElementById("fields-grid").innerHTML = FIELD_ORDER.map(function (k) {
       return '<button type="button" class="field-card tag-' + k + '" data-jump-field="' + k + '">' +
+        '<span class="field-icon">' + icon(k) + "</span>" +
         '<span class="field-name">' + esc(t.fieldNames[k]) + "</span>" +
         '<span class="field-desc">' + esc(t.fieldDesc[k]) + "</span></button>";
     }).join("");
