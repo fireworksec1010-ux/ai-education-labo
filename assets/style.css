@@ -212,3 +212,88 @@ h1, h2, h3 { line-height: 1.35; }
   .detail-list dt { border-bottom: 0; padding-bottom: 2px; }
   .detail-list dd { padding-top: 0; }
 }
+
+/* ===== ナビゲーション ===== */
+.header-inner { flex-wrap: wrap; }
+.site-nav { display: flex; gap: 4px; margin-left: auto; margin-right: 8px; }
+.site-nav a {
+  color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 600;
+  padding: 6px 10px; border-radius: 8px; white-space: nowrap;
+}
+.site-nav a:hover { background: var(--surface-2); color: var(--text); }
+.site-nav a[aria-current="page"] { color: var(--accent); }
+
+/* ===== カードの学費・寮 ===== */
+.card-meta {
+  display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; justify-content: space-between;
+  margin: 12px 0 0; padding-top: 10px; border-top: 1px dashed var(--border); font-size: 13px; color: var(--muted);
+}
+.dorm { font-weight: 600; }
+.dorm-yes { color: var(--en); }
+.badge-en-grad, .badge-en-partial { background: var(--surface-2); color: var(--en); }
+
+/* ===== 詳細ページの留学生向け情報 ===== */
+.detail-sub { font-size: 20px; margin: 32px 0 12px; }
+.level { font-weight: 700; }
+.level-undergrad, .level-grad { color: var(--en); }
+.detail-list small { display: inline-block; margin-top: 4px; font-size: 12px; }
+.detail-guide-link { margin: 16px 0 0; }
+
+/* ===== ガイドへの誘導 ===== */
+.cta {
+  display: flex; flex-wrap: wrap; gap: 16px 24px; align-items: center; justify-content: space-between;
+  background: var(--accent-soft); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 24px;
+}
+.cta h2 { margin: 0 0 4px; font-size: 20px; }
+.cta p { margin: 0; color: var(--muted); max-width: 620px; }
+.cta-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn {
+  display: inline-block; text-decoration: none; font-weight: 700; font-size: 14px;
+  padding: 10px 16px; border-radius: 10px; background: var(--accent); color: #fff; border: 1px solid var(--accent);
+}
+.btn-ghost { background: transparent; color: var(--accent); }
+
+/* ===== 留学生活ガイド ===== */
+.guide-page { max-width: 860px; }
+.guide-page h1 { font-size: clamp(26px, 5vw, 36px); margin: 0 0 8px; }
+.g-lead { color: var(--muted); margin: 0 0 20px; }
+.g-toc { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 20px; }
+.g-toc ol { margin: 6px 0 0; padding-left: 20px; }
+.g-toc li { margin: 2px 0; }
+.g-section { padding-top: 36px; scroll-margin-top: 80px; }
+.g-section h2 { font-size: 22px; margin: 0 0 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent); }
+.g-section > h3 { font-size: 16px; margin: 20px 0 10px; }
+.g-intro { margin: 0 0 8px; }
+.g-blocks { display: grid; gap: 12px; margin-top: 12px; }
+.g-block { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; }
+.g-block h3 { font-size: 16px; margin: 0 0 6px; }
+.g-block p { margin: 0; }
+.g-block ul { margin: 0; padding-left: 20px; }
+.g-block li { margin: 3px 0; }
+.g-note { margin-top: 32px; font-size: 13px; color: var(--muted); }
+.timeline { list-style: none; margin: 0; padding: 0; border-left: 3px solid var(--accent-soft); }
+.timeline li { position: relative; padding: 0 0 14px 20px; display: flex; flex-direction: column; }
+.timeline li::before {
+  content: ""; position: absolute; left: -8px; top: 6px; width: 13px; height: 13px;
+  border-radius: 50%; background: var(--accent); border: 3px solid var(--bg);
+}
+.tl-when { font-weight: 700; color: var(--accent); font-size: 14px; }
+.steps { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; counter-reset: step; }
+.steps li {
+  counter-increment: step; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 999px; padding: 4px 12px 4px 6px; font-size: 14px;
+}
+.steps li::before {
+  content: counter(step); display: inline-grid; place-items: center; width: 20px; height: 20px; margin-right: 6px;
+  border-radius: 50%; background: var(--accent); color: #fff; font-size: 12px; font-weight: 700;
+}
+
+@media (max-width: 860px) {
+  .site-nav { order: 3; width: 100%; margin: 0 0 8px; overflow-x: auto; }
+  .site-nav a { padding: 4px 10px 4px 0; }
+}
+@media (max-width: 640px) {
+  .cta { padding: 18px; }
+  .btn { width: 100%; text-align: center; }
+  .cta-actions { width: 100%; }
+}

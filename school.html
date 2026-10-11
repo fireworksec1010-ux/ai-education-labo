@@ -10,10 +10,15 @@
 <body data-page="school">
   <header class="site-header">
     <div class="wrap header-inner">
-      <a class="brand" data-home href="index.html">
+      <a class="brand" data-link="index.html" href="index.html">
         <span class="brand-mark" aria-hidden="true">T</span>
         <span><span class="brand-name" data-i18n="siteName"></span><span class="brand-sub" data-i18n="siteSub"></span></span>
       </a>
+      <nav class="site-nav" aria-label="Main">
+        <a data-link="index.html" href="index.html" aria-current="page" data-i18n="navSchools"></a>
+        <a data-link="guide.html" href="guide.html" data-i18n="navGuide"></a>
+        <a data-link="guide.html#job" href="guide.html#job" data-i18n="navJob"></a>
+      </nav>
       <div class="lang-switch" role="group" aria-label="Language">
         <button type="button" data-lang="ja">日本語</button>
         <button type="button" data-lang="en">EN</button>
@@ -23,7 +28,7 @@
   </header>
 
   <main class="wrap section detail">
-    <a class="back" data-home href="index.html">← <span data-i18n="back"></span></a>
+    <a class="back" data-link="index.html" href="index.html">← <span data-i18n="back"></span></a>
     <div id="detail"></div>
   </main>
 
@@ -36,6 +41,7 @@
 
   <script src="data/i18n.js"></script>
   <script src="data/schools.js"></script>
+  <script src="data/study-info.js"></script>
   <script src="assets/app.js"></script>
 </body>
 </html>

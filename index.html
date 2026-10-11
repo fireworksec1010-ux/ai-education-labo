@@ -11,10 +11,15 @@
 <body data-page="index">
   <header class="site-header">
     <div class="wrap header-inner">
-      <a class="brand" data-home href="index.html">
+      <a class="brand" data-link="index.html" href="index.html">
         <span class="brand-mark" aria-hidden="true">T</span>
         <span><span class="brand-name" data-i18n="siteName"></span><span class="brand-sub" data-i18n="siteSub"></span></span>
       </a>
+      <nav class="site-nav" aria-label="Main">
+        <a data-link="index.html" href="index.html" aria-current="page" data-i18n="navSchools"></a>
+        <a data-link="guide.html" href="guide.html" data-i18n="navGuide"></a>
+        <a data-link="guide.html#job" href="guide.html#job" data-i18n="navJob"></a>
+      </nav>
       <div class="lang-switch" role="group" aria-label="Language">
         <button type="button" data-lang="ja">日本語</button>
         <button type="button" data-lang="en">EN</button>
@@ -30,7 +35,7 @@
         <p class="hero-lead" data-i18n="heroLead"></p>
         <div class="stats">
           <div class="stat"><span class="stat-num" id="stat-schools"></span><span class="stat-label" data-i18n="statSchools"></span></div>
-          <div class="stat"><span class="stat-num" id="stat-english"></span><span class="stat-label" data-i18n="statEnglish"></span></div>
+          <div class="stat"><span class="stat-num" id="stat-english"></span><span class="stat-label" data-i18n="statUndergradEn"></span></div>
           <div class="stat"><span class="stat-num">3</span><span class="stat-label" data-i18n="statTypes"></span></div>
         </div>
       </div>
@@ -56,12 +61,29 @@
         <div class="filter-row filter-row-inline">
           <label class="filter-label" for="f-region" data-i18n="filterRegion"></label>
           <select id="f-region" class="select"></select>
-          <label class="check"><input type="checkbox" id="f-english"> <span data-i18n="englishOnly"></span></label>
+        </div>
+        <div class="filter-row filter-row-inline">
+          <label class="filter-label" for="f-english" data-i18n="filterEnglish"></label>
+          <select id="f-english" class="select"></select>
+          <label class="check"><input type="checkbox" id="f-dorm"> <span data-i18n="dormOnly"></span></label>
           <button type="button" class="link-btn" id="reset" data-i18n="reset"></button>
         </div>
       </div>
       <p class="result-count" id="result-count" aria-live="polite"></p>
       <div class="cards" id="cards"></div>
+    </section>
+
+    <section class="wrap section">
+      <div class="cta">
+        <div>
+          <h2 data-i18n="ctaTitle"></h2>
+          <p data-i18n="ctaText"></p>
+        </div>
+        <div class="cta-actions">
+          <a class="btn" data-link="guide.html" href="guide.html" data-i18n="ctaGuide"></a>
+          <a class="btn btn-ghost" data-link="guide.html#job" href="guide.html#job" data-i18n="ctaJob"></a>
+        </div>
+      </div>
     </section>
 
     <section class="wrap section">
@@ -79,6 +101,7 @@
 
   <script src="data/i18n.js"></script>
   <script src="data/schools.js"></script>
+  <script src="data/study-info.js"></script>
   <script src="assets/app.js"></script>
 </body>
 </html>

@@ -7,7 +7,10 @@
 |---|---|
 | `index.html` | 一覧ページ（検索・絞り込み） |
 | `school.html` | 学校詳細ページ（`school.html?id=utokyo&lang=en` のように表示） |
-| `data/schools.js` | **学校データ**（ここを編集する） |
+| `guide.html` | 留学生活ガイド・就職活動ガイド（`guide.html#job` で就職活動へ） |
+| `data/schools.js` | **学校データ**（名前・学部・紹介文など） |
+| `data/study-info.js` | **留学生向け情報**（学費・奨学金・寮・英語で卒業できるか）。学費は毎年見直す |
+| `data/guide.js` | 留学生活ガイドの本文（3言語） |
 | `data/i18n.js` | 画面の固定文言（3言語）と情報確認日 `DATA_DATE` |
 | `assets/app.js` / `assets/style.css` | 表示処理とデザイン |
 | `tools/check.html` | データ点検ページ（ブラウザで開くと欠けている訳などを表示） |
@@ -24,5 +27,7 @@
 - `english` … 英語で学べるコースがあれば `true`
 - `url` … 公式サイト、`checked` … 情報確認年月（例 `"2026-10"`）
 - `name` `pref` `programs` `desc` `englishNote` … それぞれ `{ ja, en, zh }` の3言語（中国語は簡体字）
+
+あわせて `data/study-info.js` に同じ `id` で留学生向け情報を1件追加します（項目の意味はファイル冒頭のコメント参照）。
 
 追加後は `tools/check.html` を開き、「MISSING」などのエラーが出ないことを確認してから公開します。

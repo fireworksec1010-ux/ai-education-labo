@@ -1,15 +1,52 @@
-<!doctype html><meta charset="utf-8"><body><pre id="o"></pre>
+<!doctype html><meta charset="utf-8"><title>データ点検</title><body><pre id="o"></pre>
 <script src="../data/i18n.js"></script><script src="../data/schools.js"></script>
+<script src="../data/study-info.js"></script><script src="../data/guide.js"></script>
 <script>
-var out=[], L=["ja","en","zh"], ids={};
-SCHOOLS.forEach(function(s){
-  if(ids[s.id]) out.push("DUP "+s.id); ids[s.id]=1;
-  ["name","pref","programs","desc","englishNote"].forEach(function(k){L.forEach(function(l){ if(!s[k]||!s[k][l]) out.push("MISSING "+s.id+" "+k+"."+l);});});
-  s.fields.forEach(function(f){ if(!I18N.ja.fieldNames[f]) out.push("BADFIELD "+s.id+" "+f);});
-  L.forEach(function(l){ if(!I18N[l].typeNames[s.type]) out.push("BADTYPE "+s.id); if(!I18N[l].regionNames[s.region]) out.push("BADREGION "+s.id);});
+// 学校データ・留学生向け情報・ガイド本文の欠けを点検する。問題がなければ「OK」と件数だけが表示される
+var out = [], L = ["ja", "en", "zh"], ids = {};
+function tri(v, label) { if (!v || typeof v !== "object") return; L.forEach(function (l) { if (!v[l]) out.push("MISSING " + label + "." + l); }); }
+SCHOOLS.forEach(function (s) {
+  if (ids[s.id]) out.push("DUP " + s.id); ids[s.id] = 1;
+  ["name", "pref", "programs", "desc"].forEach(function (k) { if (!s[k]) out.push("MISSING " + s.id + " " + k); else tri(s[k], s.id + " " + k); });
+  s.fields.forEach(function (f) { if (!I18N.ja.fieldNames[f]) out.push("BADFIELD " + s.id + " " + f); });
+  L.forEach(function (l) {
+    if (!I18N[l].typeNames[s.type]) out.push("BADTYPE " + s.id);
+    if (!I18N[l].regionNames[s.region]) out.push("BADREGION " + s.id);
+  });
+  var st = STUDY_INFO[s.id];
+  if (!st) { out.push("NO STUDY_INFO " + s.id); return; }
+  if (!I18N.ja.englishLevels[st.english]) out.push("BAD english " + s.id);
+  if (!I18N.ja.dormNames[st.dorm]) out.push("BAD dorm " + s.id);
+  if (!(st.tuition === null || typeof st.tuition === "number")) out.push("BAD tuition " + s.id);
+  [["englishNote", "sharedNotes"], ["tuitionNote", "sharedNotes"], ["scholarship", "scholarshipTexts"]].forEach(function (p) {
+    var v = st[p[0]];
+    if (typeof v === "string") L.forEach(function (l) { if (!I18N[l][p[1]][v]) out.push("BAD KEY " + s.id + " " + p[0] + "=" + v); });
+    else tri(v, s.id + " " + p[0]);
+  });
+  tri(st.dormNote, s.id + " dormNote");
 });
-var keys=Object.keys(I18N.ja); L.forEach(function(l){keys.forEach(function(k){ if(I18N[l][k]===undefined) out.push("I18N missing "+l+"."+k);});});
-out.push("TOTAL "+SCHOOLS.length+" / english "+SCHOOLS.filter(function(s){return s.english}).length);
-var c={}; SCHOOLS.forEach(function(s){c[s.type]=(c[s.type]||0)+1}); out.push(JSON.stringify(c));
-document.getElementById("o").textContent=out.join("\n");
+Object.keys(STUDY_INFO).forEach(function (k) { if (!ids[k]) out.push("STUDY_INFO without school: " + k); });
+var keys = Object.keys(I18N.ja); L.forEach(function (l) { keys.forEach(function (k) { if (I18N[l][k] === undefined) out.push("I18N missing " + l + "." + k); }); });
+// ガイド：3言語でセクション・項目数が揃っているか
+var ref = GUIDE.ja.sections;
+L.forEach(function (l) {
+  var secs = GUIDE[l].sections;
+  if (secs.length !== ref.length) out.push("GUIDE " + l + " section count differs");
+  secs.forEach(function (sec, i) {
+    var r = ref[i]; if (!r) return;
+    if (sec.id !== r.id) out.push("GUIDE " + l + " id differs at " + i);
+    if (sec.blocks.length !== r.blocks.length) out.push("GUIDE " + l + " " + sec.id + " block count differs");
+    sec.blocks.forEach(function (b, j) {
+      var rb = r.blocks[j]; if (!rb) return;
+      if ((b.items || []).length !== (rb.items || []).length) out.push("GUIDE " + l + " " + sec.id + " block " + j + " item count differs");
+    });
+    if ((sec.timeline || []).length !== (r.timeline || []).length) out.push("GUIDE " + l + " timeline differs");
+    if ((sec.steps || []).length !== (r.steps || []).length) out.push("GUIDE " + l + " steps differs");
+  });
+});
+if (!out.length) out.push("OK");
+out.push("TOTAL " + SCHOOLS.length);
+var c = {}; SCHOOLS.forEach(function (s) { var e = STUDY_INFO[s.id] ? STUDY_INFO[s.id].english : "?"; c[e] = (c[e] || 0) + 1; });
+out.push("english levels " + JSON.stringify(c));
+document.getElementById("o").textContent = out.join("\n");
 </script>
