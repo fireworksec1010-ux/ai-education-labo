@@ -344,3 +344,69 @@ window.I18N = {
 };
 
 window.DATA_DATE = "2026-10";
+
+// お問い合わせ先（食品サイト「食卓の物価」と同じアドレス）
+window.CONTACT_EMAIL = "fireworks.fd.2020@gmail.com";
+
+window.I18N.ja.navContact = "お問い合わせ";
+window.I18N.ja.contact = {
+  title: "お問い合わせ",
+  lead: "掲載内容の誤りのご指摘、掲載してほしい学校のご提案、サイトへのご意見などは、メールでお送りください。",
+  button: "メールを送る",
+  subject: "【Tech Campus Japan】お問い合わせ",
+  includeTitle: "メールに書いていただきたいこと",
+  include: [
+    "お問い合わせの種類（情報の誤り／学校の掲載希望／ご意見・その他）",
+    "対象の学校名やページ（例：東北大学の詳細ページ、留学生活ガイド）",
+    "情報の誤りの場合は、正しい内容と出典（公式サイトのURLなど）"
+  ],
+  notesTitle: "ご注意",
+  notes: [
+    "個人で運営しているため、返信までにお時間をいただく場合があります。すべてのお問い合わせへの返信はお約束できません。",
+    "本サイトは各学校の公式窓口ではありません。入試・学費・寮などの手続きは、各学校へ直接お問い合わせください。",
+    "ビザ（在留資格）の申請代行や、個別の進学・就職のあっせんは行っていません。",
+    "日本語・英語・中国語のいずれでもお送りいただけます。"
+  ]
+};
+
+window.I18N.en.navContact = "Contact";
+window.I18N.en.contact = {
+  title: "Contact",
+  lead: "Please email us to report errors, suggest schools to add, or share feedback about the site.",
+  button: "Send an email",
+  subject: "[Tech Campus Japan] Inquiry",
+  includeTitle: "Please include",
+  include: [
+    "Type of inquiry (error report / school suggestion / feedback or other)",
+    "The school or page concerned (e.g. Tohoku University detail page, Student Life Guide)",
+    "For errors: the correct information and its source (e.g. official website URL)"
+  ],
+  notesTitle: "Please note",
+  notes: [
+    "This site is run by an individual, so replies may take some time. We cannot guarantee a reply to every message.",
+    "This site is not an official contact point for any school. For admissions, tuition, dormitories and other procedures, please contact the school directly.",
+    "We do not handle visa (status of residence) applications or provide individual admission or job placement services.",
+    "You may write in Japanese, English or Chinese."
+  ]
+};
+
+window.I18N.zh.navContact = "联系我们";
+window.I18N.zh.contact = {
+  title: "联系我们",
+  lead: "如发现信息错误、希望收录某所学校或对本站有任何意见，请通过电子邮件联系我们。",
+  button: "发送邮件",
+  subject: "【Tech Campus Japan】咨询",
+  includeTitle: "邮件中请注明",
+  include: [
+    "咨询类型（信息错误／希望收录学校／意见・其他）",
+    "相关学校或页面（例：东北大学详情页、留学生活指南）",
+    "如为信息错误，请提供正确内容及出处（官方网站URL等）"
+  ],
+  notesTitle: "注意事项",
+  notes: [
+    "本站由个人运营，回复可能需要一些时间，无法保证回复所有咨询。",
+    "本站并非各学校的官方窗口。有关入学考试、学费、宿舍等手续，请直接联系各学校。",
+    "本站不代办签证（在留资格）申请，也不提供个别升学或就业中介服务。",
+    "可使用日语、英语或中文来信。"
+  ]
+};

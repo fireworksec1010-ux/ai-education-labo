@@ -363,6 +363,26 @@
     }
   }
 
+  // ---------- お問い合わせ ----------
+  function renderContact() {
+    var c = t.contact;
+    var mail = window.CONTACT_EMAIL;
+    document.title = c.title + " | " + t.siteName;
+    var list = function (items) { return "<ul>" + items.map(function (i) { return "<li>" + esc(i) + "</li>"; }).join("") + "</ul>"; };
+    document.getElementById("contact").innerHTML =
+      "<h1>" + esc(c.title) + '</h1><p class="g-lead">' + esc(c.lead) + "</p>" +
+      '<div class="contact-card">' +
+        '<a class="btn btn-mail" href="mailto:' + esc(mail) + "?subject=" + encodeURIComponent(c.subject) + '">' +
+          '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>' +
+          esc(c.button) + "</a>" +
+        '<p class="contact-mail">' + esc(mail) + "</p>" +
+      "</div>" +
+      '<div class="g-blocks">' +
+        '<div class="g-block"><h3>' + esc(c.includeTitle) + "</h3>" + list(c.include) + "</div>" +
+        '<div class="g-block"><h3>' + esc(c.notesTitle) + "</h3>" + list(c.notes) + "</div>" +
+      "</div>";
+  }
+
   // ---------- 起動 ----------
   var page = document.body.getAttribute("data-page");
 
@@ -373,6 +393,8 @@
       renderIndexStatic(); renderFilters(); renderList();
     } else if (page === "guide") {
       renderGuide();
+    } else if (page === "contact") {
+      renderContact();
     } else {
       renderDetail();
     }
