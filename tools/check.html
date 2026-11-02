@@ -1,6 +1,6 @@
 <!doctype html><meta charset="utf-8"><title>データ点検</title><body><pre id="o"></pre>
 <script src="../data/i18n.js"></script><script src="../data/schools.js"></script>
-<script src="../data/study-info.js"></script><script src="../data/guide.js"></script>
+<script src="../data/study-info.js"></script><script src="../data/guide.js"></script><script src="../data/news.js"></script>
 <script>
 // 学校データ・留学生向け情報・ガイド本文の欠けを点検する。問題がなければ「OK」と件数だけが表示される
 var out = [], L = ["ja", "en", "zh"], ids = {};
@@ -44,7 +44,29 @@ L.forEach(function (l) {
     if ((sec.steps || []).length !== (r.steps || []).length) out.push("GUIDE " + l + " steps differs");
   });
 });
+// 月次トピックス：3言語・種類・関連校・日付の形式
+var dateRe = /^\d{4}-\d{2}-\d{2}$/, topicIds = {};
+(NEWS.issues || []).forEach(function (is) {
+  if (!/^\d{4}-\d{2}$/.test(is.month)) out.push("NEWS bad month " + is.month);
+  (is.spotlight || []).forEach(function (id) { if (!ids[id]) out.push("NEWS spotlight unknown school " + id); });
+  is.topics.forEach(function (tp) {
+    if (topicIds[tp.id]) out.push("NEWS DUP topic " + tp.id); topicIds[tp.id] = 1;
+    if (!I18N.ja.news.kinds[tp.kind]) out.push("NEWS bad kind " + tp.id);
+    tri(tp.title, "NEWS " + tp.id + " title"); tri(tp.body, "NEWS " + tp.id + " body");
+    (tp.schools || []).forEach(function (id) { if (!ids[id]) out.push("NEWS " + tp.id + " unknown school " + id); });
+    if (!(tp.sources || []).length) out.push("NEWS " + tp.id + " has no source");
+  });
+});
+(NEWS.calendar || []).forEach(function (e, i) {
+  var label = "CAL " + i + " " + e.start;
+  if (!dateRe.test(e.start) || (e.end && !dateRe.test(e.end))) out.push(label + " bad date");
+  if (e.end && e.end < e.start) out.push(label + " end before start");
+  if (!I18N.ja.news.calKinds[e.kind]) out.push(label + " bad kind");
+  tri(e.title, label + " title");
+  if (e.approx) { if (!e.when) out.push(label + " approx without when"); else tri(e.when, label + " when"); }
+});
 if (!out.length) out.push("OK");
+out.push("NEWS issues " + NEWS.issues.length + " / topics " + Object.keys(topicIds).length + " / calendar " + NEWS.calendar.length);
 out.push("TOTAL " + SCHOOLS.length);
 var c = {}; SCHOOLS.forEach(function (s) { var e = STUDY_INFO[s.id] ? STUDY_INFO[s.id].english : "?"; c[e] = (c[e] || 0) + 1; });
 out.push("english levels " + JSON.stringify(c));

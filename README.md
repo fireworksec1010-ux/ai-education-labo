@@ -8,6 +8,7 @@
 | `index.html` | 一覧ページ（検索・絞り込み） |
 | `school.html` | 学校詳細ページ（`school.html?id=utokyo&lang=en` のように表示） |
 | `guide.html` | 留学生活ガイド・就職活動ガイド（`guide.html#job` で就職活動へ） |
+| `news.html` | 月次トピックス・締め切りカレンダー・今月の注目校（データは `data/news.js`） |
 | `contact.html` | お問い合わせ（宛先は `data/i18n.js` の `CONTACT_EMAIL`） |
 | `data/schools.js` | **学校データ**（名前・学部・紹介文など） |
 | `data/study-info.js` | **留学生向け情報**（学費・奨学金・寮・英語で卒業できるか）。学費は毎年見直す |
@@ -15,6 +16,8 @@
 | `data/i18n.js` | 画面の固定文言（3言語）と情報確認日 `DATA_DATE` |
 | `assets/app.js` / `assets/style.css` | 表示処理とデザイン |
 | `tools/check.html` | データ点検ページ（ブラウザで開くと欠けている訳などを表示） |
+
+毎月の更新手順は `.claude/skills/tech-site-update/SKILL.md` にまとめています。
 
 ビルドやサーバーは不要。`index.html` をダブルクリックすればブラウザで確認できます。
 

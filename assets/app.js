@@ -363,6 +363,116 @@
     }
   }
 
+  // ---------- 月次トピックス ----------
+  var EN_MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  function ymd(s) { var p = s.split("-"); return { y: +p[0], m: +p[1], d: +p[2] }; }
+
+  function fmtDay(s) {
+    var a = ymd(s);
+    return lang === "en" ? a.d + " " + EN_MONTHS[a.m - 1] + " " + a.y : a.y + "年" + a.m + "月" + a.d + "日";
+  }
+
+  function fmtRange(e) {
+    if (e.approx) return e.when[lang];
+    if (!e.end) return fmtDay(e.start);
+    var a = ymd(e.start), b = ymd(e.end);
+    if (a.y === b.y && a.m === b.m) {
+      return lang === "en" ? a.d + "–" + b.d + " " + EN_MONTHS[a.m - 1] + " " + a.y : a.y + "年" + a.m + "月" + a.d + "日〜" + b.d + "日";
+    }
+    return fmtDay(e.start) + (lang === "en" ? " – " : "〜") + fmtDay(e.end);
+  }
+
+  function todayStr() {
+    var d = new Date();
+    return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
+  }
+
+  function latestIssue() { return ((window.NEWS || {}).issues || [])[0]; }
+
+  function schoolById(id) { return schools.filter(function (x) { return x.id === id; })[0]; }
+
+  function topicArticle(tp) {
+    var n = t.news;
+    var related = (tp.schools || []).map(schoolById).filter(Boolean).map(function (s) {
+      return '<a class="chip-link" href="' + schoolUrl(s) + '">' + esc(s.name[lang]) + "</a>";
+    }).join("");
+    var sources = (tp.sources || []).map(function (src) {
+      return '<a href="' + esc(src.url) + '" target="_blank" rel="noopener">' + esc(src.name) + " ↗</a>";
+    }).join(" · ");
+    return '<article class="topic" id="' + esc(tp.id) + '">' +
+      '<span class="topic-kind kind-' + tp.kind + '">' + esc(n.kinds[tp.kind]) + "</span>" +
+      "<h3>" + esc(tp.title[lang]) + "</h3>" +
+      "<p>" + esc(tp.body[lang]) + "</p>" +
+      (related ? '<div class="topic-related"><span>' + esc(n.related) + "</span>" + related + "</div>" : "") +
+      (sources ? '<p class="topic-sources">' + esc(n.sources) + ": " + sources + "</p>" : "") +
+      "</article>";
+  }
+
+  function calendarList() {
+    var n = t.news, today = todayStr();
+    var items = ((window.NEWS || {}).calendar || []).slice().sort(function (a, b) { return a.start < b.start ? -1 : 1; });
+    var upcoming = items.filter(function (e) { return (e.end || e.start) >= today; });
+    var past = items.filter(function (e) { return (e.end || e.start) < today; });
+    return '<ol class="cal">' + upcoming.concat(past).map(function (e) {
+      var ended = (e.end || e.start) < today;
+      return '<li class="cal-item' + (ended ? " is-past" : "") + '">' +
+        '<span class="cal-date">' + esc(fmtRange(e)) +
+          (e.approx ? ' <em class="cal-approx">' + esc(n.approx) + "</em>" : "") + "</span>" +
+        '<span class="cal-body"><span class="cal-kind cal-' + e.kind + '">' + esc(n.calKinds[e.kind]) + "</span>" +
+          (e.url ? '<a href="' + esc(e.url) + '" target="_blank" rel="noopener">' + esc(e.title[lang]) + "</a>" : esc(e.title[lang])) +
+          (ended ? ' <span class="cal-past">' + esc(n.past) + "</span>" : "") + "</span></li>";
+    }).join("") + "</ol>";
+  }
+
+  function renderNews() {
+    var n = t.news;
+    var issues = (window.NEWS || {}).issues || [];
+    document.title = n.title + " | " + t.siteName;
+    var first = issues[0];
+    var html = "<h1>" + esc(n.title) + '</h1><p class="g-lead">' + esc(n.lead) + "</p>";
+    if (first) {
+      html += '<section class="g-section"><h2>' + esc(n.issue(first.month)) + '</h2><div class="topics">' +
+        first.topics.map(topicArticle).join("") + "</div></section>";
+    }
+    html += '<section class="g-section" id="calendar"><h2>' + esc(n.calendar) + '</h2><p class="g-intro">' +
+      esc(n.calendarLead) + "</p>" + calendarList() + "</section>";
+    if (first && first.spotlight && first.spotlight.length) {
+      html += '<section class="g-section"><h2>' + esc(n.spotlight) + '</h2><div class="cards">' +
+        first.spotlight.map(schoolById).filter(Boolean).map(card).join("") + "</div></section>";
+    }
+    if (issues.length > 1) {
+      html += '<section class="g-section"><h2>' + esc(n.archive) + "</h2>" + issues.slice(1).map(function (is) {
+        return "<h3>" + esc(n.issue(is.month)) + '</h3><div class="topics">' + is.topics.map(topicArticle).join("") + "</div>";
+      }).join("") + "</section>";
+    }
+    document.getElementById("news").innerHTML = html;
+    if (location.hash) {
+      var target = document.getElementById(location.hash.slice(1));
+      if (target) target.scrollIntoView();
+    }
+  }
+
+  // トップページの「最新トピックス」「今月の注目校」
+  function renderHomeNews() {
+    var box = document.getElementById("home-news");
+    var is = latestIssue();
+    if (!box || !is) { if (box) box.hidden = true; return; }
+    var n = t.news;
+    var topics = is.topics.slice(0, 3).map(function (tp) {
+      return '<a class="news-card" data-link="news.html#' + esc(tp.id) + '" href="news.html#' + esc(tp.id) + '">' +
+        '<span class="topic-kind kind-' + tp.kind + '">' + esc(n.kinds[tp.kind]) + "</span>" +
+        "<strong>" + esc(tp.title[lang]) + "</strong>" +
+        '<span class="news-month">' + esc(n.issue(is.month)) + "</span></a>";
+    }).join("");
+    var spot = (is.spotlight || []).map(schoolById).filter(Boolean).map(card).join("");
+    box.innerHTML =
+      '<p class="section-kicker">News</p>' +
+      '<div class="home-news-head"><h2>' + esc(n.latest) + '</h2><a data-link="news.html" href="news.html">' + esc(n.seeAll) + " →</a></div>" +
+      '<div class="news-cards">' + topics + "</div>" +
+      (spot ? '<h3 class="spot-title">' + esc(n.spotlight) + '</h3><div class="cards">' + spot + "</div>" : "");
+  }
+
   // ---------- お問い合わせ ----------
   function renderContact() {
     var c = t.contact;
@@ -390,7 +500,9 @@
     renderChrome();
     if (page === "index") {
       document.title = t.siteName + " | " + t.siteSub;
-      renderIndexStatic(); renderFilters(); renderList();
+      renderIndexStatic(); renderFilters(); renderList(); renderHomeNews();
+    } else if (page === "news") {
+      renderNews();
     } else if (page === "guide") {
       renderGuide();
     } else if (page === "contact") {

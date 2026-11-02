@@ -44,9 +44,14 @@ window.STUDY_INFO = {
   "tohoku-u": {
     english: "undergrad", tuition: 535800,
     englishNote: {
-      ja: "「FGL」の機械・航空宇宙工学コース（IMAC-U）では、ロボティクスなどを含む工学の学位を英語だけで取得可能。日本語力は不要（TOEFL iBT 79／IELTS 6.0以上など）。",
-      en: "The FGL program's International Mechanical and Aerospace Engineering course (IMAC-U) awards an engineering degree — including robotics — fully in English. No Japanese required (e.g. TOEFL iBT 79 / IELTS 6.0+).",
-      zh: "“FGL”项目的机械・航空宇宙工学课程（IMAC-U）可全英文取得包括机器人学在内的工学学位，无需日语（需TOEFL iBT 79／IELTS 6.0以上等）。"
+      ja: "「FGL」の機械・航空宇宙工学コース（IMAC-U）では、ロボティクスなどを含む工学の学位を英語だけで取得可能。日本語力は不要（TOEFL iBT 79／IELTS 6.0以上など）。2027年度には英語中心で学ぶ新課程「ゲートウェイカレッジ」も開設。",
+      en: "The FGL program's International Mechanical and Aerospace Engineering course (IMAC-U) awards an engineering degree — including robotics — fully in English. No Japanese required (e.g. TOEFL iBT 79 / IELTS 6.0+). The English-centred Gateway College also opens in 2027.",
+      zh: "“FGL”项目的机械・航空宇宙工学课程（IMAC-U）可全英文取得包括机器人学在内的工学学位，无需日语（需TOEFL iBT 79／IELTS 6.0以上等）。2027年度还将开设以英语为主的新课程“Gateway College”。"
+    },
+    tuitionNote: {
+      ja: "2027年4月以降に入学する外国人留学生（学士・修士）は年90万円に改定。在学中の学生は変更なし。",
+      en: "From April 2027, international students entering bachelor's or master's programs pay ¥900,000/yr. No change for current students.",
+      zh: "2027年4月以后入学的外国留学生（本科・硕士）学费调整为每年900,000日元，在读学生不变。"
     },
     scholarship: "univ", dorm: "yes"
   },
@@ -92,6 +97,11 @@ window.STUDY_INFO = {
       ja: "学部の「学際工学（Interdisciplinary Engineering）」プログラムで、理工系を英語だけで学べる。英語で行う授業が非常に多く、大学院にも英語コース多数。",
       en: "The Bachelor's Program in Interdisciplinary Engineering is taught in English. The university offers a very large number of English classes and many English-taught graduate programs.",
       zh: "本科“跨学科工学（Interdisciplinary Engineering）”项目可全英文学习理工科。英文授课数量众多，研究生阶段也有大量英文课程。"
+    },
+    tuitionNote: {
+      ja: "2027年4月以降に入学する外国人留学生は、現行授業料に年7万3,000円を上乗せ（今後見直しの可能性あり）。在学中の学生は変更なし。",
+      en: "International students entering from April 2027 pay an extra ¥73,000/yr on top of current tuition (may be revised). No change for current students.",
+      zh: "2027年4月以后入学的外国留学生在现行学费基础上每年加收73,000日元（今后可能调整），在读学生不变。"
     },
     scholarship: "univ", dorm: "yes"
   },
@@ -273,6 +283,21 @@ window.STUDY_INFO = {
       zh: "所有录取学生均可获得研究助理薪酬及住房支持。"
     },
     dorm: "yes"
+  },
+
+  "pu-kumamoto": {
+    english: "none", tuition: 535800,
+    englishNote: {
+      ja: "授業は日本語。半導体学部の一般選抜は大学入学共通テストを利用します。",
+      en: "Classes are in Japanese. General admission to the Faculty of Semiconductors uses Japan's Common Test for University Admissions.",
+      zh: "以日语授课。半导体学部一般选拔需参加日本大学入学共通考试。"
+    },
+    tuitionNote: {
+      ja: "公立大学のため、入学金は熊本県内出身者20万7,000円・県外41万4,000円（2025年度の金額）。",
+      en: "As a public university, the admission fee is ¥207,000 for Kumamoto residents and ¥414,000 for others (2025 figures).",
+      zh: "作为公立大学，入学金熊本县内生源为207,000日元，县外为414,000日元（2025年度金额）。"
+    },
+    scholarship: "univ", dorm: "check"
   },
 
   // ===== 高専 =====

@@ -343,7 +343,7 @@ window.I18N = {
   }
 };
 
-window.DATA_DATE = "2026-10";
+window.DATA_DATE = "2026-11";
 
 // お問い合わせ先（食品サイト「食卓の物価」と同じアドレス）
 window.CONTACT_EMAIL = "fireworks.fd.2020@gmail.com";
@@ -409,4 +409,62 @@ window.I18N.zh.contact = {
     "本站不代办签证（在留资格）申请，也不提供个别升学或就业中介服务。",
     "可使用日语、英语或中文来信。"
   ]
+};
+
+// 月次トピックス・カレンダー
+window.I18N.ja.navNews = "トピックス";
+window.I18N.ja.news = {
+  title: "今月のトピックス",
+  lead: "日本の技術系の大学・高専・高校に関する新しい動き（新しい学部やコース、学費、入試）と、これからの締め切り・イベントを毎月まとめています。",
+  issue: function (ym) { var p = ym.split("-"); return p[0] + "年" + parseInt(p[1], 10) + "月号"; },
+  latest: "最新トピックス",
+  seeAll: "トピックスをすべて見る",
+  spotlight: "今月の注目校",
+  calendar: "締め切り・試験・イベント",
+  calendarLead: "日付は各機関の発表にもとづきます。「目安」は例年の時期で、正式な日程は発表を確認してください。",
+  sources: "出典",
+  related: "関連する学校",
+  past: "終了",
+  approx: "目安",
+  kinds: { tuition: "学費", program: "新しい学部・コース", admission: "入試", policy: "制度・施策" },
+  calKinds: { deadline: "出願", exam: "試験", event: "イベント", scholarship: "奨学金" },
+  archive: "過去の号"
+};
+
+window.I18N.en.navNews = "News";
+window.I18N.en.news = {
+  title: "Monthly News",
+  lead: "Each month we round up what's new at Japan's tech universities, KOSEN and high schools — new faculties and courses, tuition, admissions — plus upcoming deadlines and events.",
+  issue: function (ym) { var p = ym.split("-"); var m = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]; return m[parseInt(p[1], 10) - 1] + " " + p[0] + " issue"; },
+  latest: "Latest news",
+  seeAll: "See all news",
+  spotlight: "Schools in the spotlight",
+  calendar: "Deadlines, exams & events",
+  calendarLead: "Dates are based on official announcements. Items marked \"approx.\" show the usual timing — check the official notice for exact dates.",
+  sources: "Sources",
+  related: "Related schools",
+  past: "Ended",
+  approx: "approx.",
+  kinds: { tuition: "Tuition", program: "New faculty / course", admission: "Admissions", policy: "Policy" },
+  calKinds: { deadline: "Application", exam: "Exam", event: "Event", scholarship: "Scholarship" },
+  archive: "Past issues"
+};
+
+window.I18N.zh.navNews = "动态";
+window.I18N.zh.news = {
+  title: "每月动态",
+  lead: "每月汇总日本理工类大学、高专和高中的最新动向（新学部・新课程、学费、招生）以及近期的截止日期和活动。",
+  issue: function (ym) { var p = ym.split("-"); return p[0] + "年" + parseInt(p[1], 10) + "月号"; },
+  latest: "最新动态",
+  seeAll: "查看全部动态",
+  spotlight: "本月关注院校",
+  calendar: "截止日期・考试・活动",
+  calendarLead: "日期依据各机构公布的信息。标有“参考”的为往年时间，正式日程请以官方公告为准。",
+  sources: "出处",
+  related: "相关学校",
+  past: "已结束",
+  approx: "参考",
+  kinds: { tuition: "学费", program: "新学部・新课程", admission: "招生", policy: "制度・政策" },
+  calKinds: { deadline: "报名", exam: "考试", event: "活动", scholarship: "奖学金" },
+  archive: "往期"
 };

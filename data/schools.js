@@ -68,7 +68,7 @@ window.SCHOOLS = [
     region: "hokkaido-tohoku",
     fields: ["semi", "robot", "ai", "space"],
     url: "https://www.tohoku.ac.jp/",
-    checked: "2026-10",
+    checked: "2026-11",
     name: { ja: "東北大学", en: "Tohoku University", zh: "东北大学" },
     pref: { ja: "宮城県", en: "Miyagi", zh: "宫城县" },
     programs: {
@@ -168,7 +168,7 @@ window.SCHOOLS = [
     region: "kanto",
     fields: ["robot", "ai", "prog", "space"],
     url: "https://www.tsukuba.ac.jp/",
-    checked: "2026-10",
+    checked: "2026-11",
     name: { ja: "筑波大学", en: "University of Tsukuba", zh: "筑波大学" },
     pref: { ja: "茨城県", en: "Ibaraki", zh: "茨城县" },
     programs: {
@@ -420,6 +420,27 @@ window.SCHOOLS = [
       ja: "すべて英語で運営される国際的な大学院大学。学生・教員の多くが海外出身で、脳科学とAIを結びつける研究などが行われています。大学卒業後の進学先として注目です。",
       en: "An international graduate university run entirely in English. Most students and faculty come from abroad, and research links brain science with AI. A strong option after an undergraduate degree.",
       zh: "完全以英语运营的国际化研究生大学，大部分学生和教师来自海外，开展将脑科学与人工智能相结合的研究，是本科毕业后深造的热门选择。"
+    }
+  },
+
+  {
+    id: "pu-kumamoto",
+    type: "univ-public",
+    region: "kyushu-okinawa",
+    fields: ["semi", "ai", "prog"],
+    url: "https://www.pu-kumamoto.ac.jp/",
+    checked: "2026-11",
+    name: { ja: "熊本県立大学", en: "Prefectural University of Kumamoto", zh: "熊本县立大学" },
+    pref: { ja: "熊本県", en: "Kumamoto", zh: "熊本县" },
+    programs: {
+      ja: "半導体学部 半導体学科（2027年4月開設、定員60人）：AI・応用情報／マイクロエレクトロニクス／スマートマテリアルの3つの履修モデル",
+      en: "Faculty of Semiconductors (opening April 2027, 60 students/year): three tracks — AI & applied informatics, microelectronics, smart materials",
+      zh: "半导体学部 半导体学科（2027年4月开设，每届60人）：AI・应用信息／微电子／智能材料三个方向"
+    },
+    desc: {
+      ja: "世界的な半導体メーカーの工場が集まる熊本に、2027年4月に半導体学部を開設。2年生までに自分で半導体チップを設計する技術を身につけ、企業でのインターンシップなど実践的に学びます。",
+      en: "Opening a Faculty of Semiconductors in April 2027 in Kumamoto, home to major global chip plants. Students learn to design their own semiconductor chips by year two and gain hands-on experience through company internships.",
+      zh: "在全球知名半导体企业工厂聚集的熊本，于2027年4月开设半导体学部。学生在二年级前掌握自行设计半导体芯片的技术，并通过企业实习等进行实践学习。"
     }
   },
 
