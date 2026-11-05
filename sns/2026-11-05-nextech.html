@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Noto+Sans+JP:wght@700;800&display=swap">
+<style>
+  html, body { margin: 0; width: 1080px; height: 1350px; overflow: hidden; }
+  body {
+    font-family: "Space Grotesk", "Noto Sans JP", sans-serif; color: #fff; position: relative;
+    background:
+      radial-gradient(700px 520px at 92% 8%, rgba(168, 85, 247, .55), transparent 70%),
+      radial-gradient(760px 600px at 0% 100%, rgba(34, 211, 238, .45), transparent 70%),
+      linear-gradient(160deg, #0b1230 0%, #141c4a 55%, #1d1250 100%);
+  }
+  body::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px);
+    background-size: 54px 54px;
+    mask-image: radial-gradient(ellipse 85% 75% at 50% 45%, #000 40%, transparent 90%);
+  }
+  .wrap { position: relative; padding: 84px 84px 0; height: 100%; box-sizing: border-box; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 12px; font-size: 26px; font-weight: 700; letter-spacing: .16em;
+    padding: 12px 26px; border-radius: 999px; background: rgba(34, 211, 238, .15); border: 2px solid rgba(34, 211, 238, .6); color: #67e8f9;
+  }
+  .pill i { width: 14px; height: 14px; border-radius: 50%; background: #22d3ee; box-shadow: 0 0 16px #22d3ee; }
+  .kicker { margin: 56px 0 6px; font-size: 40px; font-weight: 600; color: #c7d2fe; }
+  h1 { margin: 0; font-size: 132px; line-height: .98; font-weight: 700; letter-spacing: -.02em; }
+  h1 span { background: linear-gradient(100deg, #22d3ee, #818cf8 55%, #e879f9); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .sub { margin: 26px 0 0; font-size: 38px; line-height: 1.35; color: #e0e7ff; max-width: 860px; }
+  .robot { position: absolute; right: 56px; top: 232px; width: 250px; opacity: .95; filter: drop-shadow(0 0 40px rgba(56, 189, 248, .5)); }
+  .info {
+    position: absolute; left: 84px; right: 84px; bottom: 170px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 22px;
+  }
+  .card { background: rgba(255, 255, 255, .1); border: 2px solid rgba(255, 255, 255, .22); border-radius: 28px; padding: 26px 30px; }
+  .card b { display: block; font-size: 24px; letter-spacing: .14em; color: #a5b4fc; margin-bottom: 6px; }
+  .card span { font-size: 44px; font-weight: 700; }
+  .card.wide { grid-column: span 2; }
+  .card.wide span { font-size: 36px; font-weight: 600; }
+  .foot { position: absolute; left: 84px; right: 84px; bottom: 64px; display: flex; align-items: center; justify-content: space-between; font-size: 28px; color: #c7d2fe; }
+  .brand { display: flex; align-items: center; gap: 14px; font-weight: 700; color: #fff; font-size: 32px; }
+</style></head>
+<body><div class="wrap">
+  <div class="pill"><i></i>NEXT WEEK IN JAPAN</div>
+  <p class="kicker">NexTech Week Autumn 2026</p>
+  <h1>The new<br><span>Physical AI</span><br>EXPO</h1>
+  <p class="sub">AI that moves in the real world — robots, machines, AI agents &amp; generative AI.</p>
+
+  <svg class="robot" viewBox="0 0 24 24" fill="none" stroke="url(#g)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+    <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#e879f9"/></linearGradient></defs>
+    <rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01M9.5 16h5M2 12v3M22 12v3"/><circle cx="12" cy="3.5" r="1"/>
+  </svg>
+
+  <div class="info">
+    <div class="card"><b>DATES</b><span>Nov 11–13</span></div>
+    <div class="card"><b>VENUE</b><span>Makuhari Messe</span></div>
+    <div class="card wide"><b>ENTRY</b><span>Free with online pre-registration · with AI EXPO</span></div>
+  </div>
+  <div class="foot">
+    <div class="brand">
+      <svg width="44" height="44" viewBox="0 0 32 32"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#a855f7"/></linearGradient></defs><path d="M16 2.5l11.5 6.6v13.8L16 29.5 4.5 22.9V9.1z" fill="rgba(34,211,238,.12)" stroke="url(#lg)" stroke-width="1.8"/><path d="M10.5 12h11M16 12v9" stroke="url(#lg)" stroke-width="2.6" stroke-linecap="round"/><circle cx="16" cy="22.6" r="1.9" fill="#22d3ee"/></svg>
+      Tech Campus Japan
+    </div>
+    <span>More AI · Robotics · Space expos →</span>
+  </div>
+</div></body></html>
