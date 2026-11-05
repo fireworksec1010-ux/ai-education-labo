@@ -468,3 +468,67 @@ window.I18N.zh.news = {
   calKinds: { deadline: "报名", exam: "考试", event: "活动", scholarship: "奖学金" },
   archive: "往期"
 };
+
+// 展示会ページ
+window.I18N.ja.navExpos = "展示会";
+window.I18N.ja.expos = {
+  title: "AI・ロボット・宇宙の展示会",
+  lead: "日本で開かれる、AI・フィジカルAI（ロボット）・宇宙・半導体の大きな展示会をまとめました。最新の技術を見られるだけでなく、企業研究や進路選びにも役立ちます。",
+  all: "すべて",
+  filterLabel: "分野",
+  upcoming: "これからの展示会",
+  past: "終了した展示会",
+  ended: "終了",
+  approx: "目安",
+  official: "公式サイト",
+  none: "この分野の展示会は現在ありません。",
+  tipsTitle: "学生・留学生が行くときのポイント",
+  tips: [
+    "多くは企業向けの商談展示会です。入場は無料で、公式サイトからの事前登録制が一般的です。",
+    "学生や18歳未満の入場に条件がある展示会もあります。行く前に公式サイトの「来場案内」を確認しましょう。",
+    "1日で多くの技術系企業を見られるので、研究テーマ探しや就職活動の企業研究にも役立ちます。",
+    "「目安」と書かれた会期は例年の時期です。正式な日程が発表されたら更新します。"
+  ]
+};
+
+window.I18N.en.navExpos = "Expos";
+window.I18N.en.expos = {
+  title: "AI, Robotics & Space Expos",
+  lead: "Major exhibitions in Japan on AI, physical AI (robotics), space and semiconductors. Great for seeing the latest technology — and for researching companies and your future path.",
+  all: "All",
+  filterLabel: "Field",
+  upcoming: "Upcoming expos",
+  past: "Past expos",
+  ended: "Ended",
+  approx: "approx.",
+  official: "Official website",
+  none: "No expos in this field right now.",
+  tipsTitle: "Tips for students and international students",
+  tips: [
+    "Most are trade shows for businesses. Entry is usually free with advance online registration.",
+    "Some shows have conditions for students or visitors under 18 — check the visitor information on the official site before you go.",
+    "You can see many tech companies in one day, which helps when choosing a research topic or researching employers for job hunting.",
+    "Dates marked \"approx.\" show the usual timing; we update them once official dates are announced."
+  ]
+};
+
+window.I18N.zh.navExpos = "展会";
+window.I18N.zh.expos = {
+  title: "AI・机器人・航天展会",
+  lead: "汇总在日本举办的AI、物理AI（机器人）、航天和半导体大型展会。不仅能看到最新技术，还有助于企业研究和升学就业选择。",
+  all: "全部",
+  filterLabel: "领域",
+  upcoming: "即将举办的展会",
+  past: "已结束的展会",
+  ended: "已结束",
+  approx: "参考",
+  official: "官方网站",
+  none: "目前没有该领域的展会。",
+  tipsTitle: "学生・留学生参观要点",
+  tips: [
+    "大多为面向企业的商务展会，一般免费入场，需通过官网提前登记。",
+    "部分展会对学生或未满18岁者入场设有条件，参观前请查看官网的“参观指南”。",
+    "一天内可以参观众多科技企业，对寻找研究课题和求职时的企业研究很有帮助。",
+    "标有“参考”的日期为往年时间，正式日程公布后会更新。"
+  ]
+};

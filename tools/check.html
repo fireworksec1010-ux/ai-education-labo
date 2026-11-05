@@ -1,6 +1,6 @@
 <!doctype html><meta charset="utf-8"><title>データ点検</title><body><pre id="o"></pre>
 <script src="../data/i18n.js"></script><script src="../data/schools.js"></script>
-<script src="../data/study-info.js"></script><script src="../data/guide.js"></script><script src="../data/news.js"></script>
+<script src="../data/study-info.js"></script><script src="../data/guide.js"></script><script src="../data/news.js"></script><script src="../data/expos.js"></script>
 <script>
 // 学校データ・留学生向け情報・ガイド本文の欠けを点検する。問題がなければ「OK」と件数だけが表示される
 var out = [], L = ["ja", "en", "zh"], ids = {};
@@ -65,7 +65,20 @@ var dateRe = /^\d{4}-\d{2}-\d{2}$/, topicIds = {};
   tri(e.title, label + " title");
   if (e.approx) { if (!e.when) out.push(label + " approx without when"); else tri(e.when, label + " when"); }
 });
+// 展示会：3言語・分野・日付の形式
+var expoIds = {};
+(window.EXPOS || []).forEach(function (x) {
+  var label = "EXPO " + x.id;
+  if (expoIds[x.id]) out.push(label + " DUP"); expoIds[x.id] = 1;
+  if (!dateRe.test(x.start) || (x.end && !dateRe.test(x.end))) out.push(label + " bad date");
+  if (x.end && x.end < x.start) out.push(label + " end before start");
+  x.fields.forEach(function (f) { if (!I18N.ja.fieldNames[f]) out.push(label + " bad field " + f); });
+  tri(x.name, label + " name"); tri(x.venue, label + " venue"); tri(x.desc, label + " desc");
+  if (x.approx) { if (!x.when) out.push(label + " approx without when"); else tri(x.when, label + " when"); }
+  if (!x.url) out.push(label + " no url");
+});
 if (!out.length) out.push("OK");
+out.push("EXPOS " + Object.keys(expoIds).length);
 out.push("NEWS issues " + NEWS.issues.length + " / topics " + Object.keys(topicIds).length + " / calendar " + NEWS.calendar.length);
 out.push("TOTAL " + SCHOOLS.length);
 var c = {}; SCHOOLS.forEach(function (s) { var e = STUDY_INFO[s.id] ? STUDY_INFO[s.id].english : "?"; c[e] = (c[e] || 0) + 1; });

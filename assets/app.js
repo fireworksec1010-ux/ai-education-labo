@@ -473,6 +473,63 @@
       (spot ? '<h3 class="spot-title">' + esc(n.spotlight) + '</h3><div class="cards">' + spot + "</div>" : "");
   }
 
+  // ---------- 展示会 ----------
+  var expoField = "all";
+
+  function expoCard(x, ended) {
+    var e = t.expos;
+    var tags = x.fields.map(function (f) {
+      return '<span class="tag tag-' + f + '">' + esc(t.fieldNames[f]) + "</span>";
+    }).join("");
+    return '<article class="expo' + (ended ? " is-past" : "") + '" id="' + esc(x.id) + '">' +
+      '<div class="expo-date">' + esc(fmtRange(x)) +
+        (x.approx ? ' <em class="cal-approx">' + esc(e.approx) + "</em>" : "") +
+        (ended ? ' <span class="cal-past">' + esc(e.ended) + "</span>" : "") + "</div>" +
+      '<div class="expo-main">' +
+        '<div class="expo-icons">' + x.fields.filter(function (f) { return ICON_PATHS[f]; }).map(function (f) {
+          return '<span class="field-icon tag-' + f + '">' + icon(f) + "</span>";
+        }).join("") + "</div>" +
+        "<h3>" + esc(x.name[lang]) + "</h3>" +
+        '<p class="expo-venue">' + esc(x.venue[lang]) + "</p>" +
+        '<p class="expo-desc">' + esc(x.desc[lang]) + "</p>" +
+        '<div class="tags">' + tags + "</div>" +
+        '<a class="expo-link" href="' + esc(x.url) + '" target="_blank" rel="noopener">' + esc(e.official) + " ↗</a>" +
+      "</div></article>";
+  }
+
+  function renderExpos() {
+    var e = t.expos, today = todayStr();
+    document.title = e.title + " | " + t.siteName;
+    var all = (window.EXPOS || []).slice().sort(function (a, b) { return a.start < b.start ? -1 : 1; });
+    var used = FIELD_ORDER.filter(function (f) { return all.some(function (x) { return x.fields.indexOf(f) >= 0; }); });
+    var list = all.filter(function (x) { return expoField === "all" || x.fields.indexOf(expoField) >= 0; });
+    var upcoming = list.filter(function (x) { return (x.end || x.start) >= today; });
+    var past = list.filter(function (x) { return (x.end || x.start) < today; });
+
+    var chips = chip("expo", "all", e.all, expoField === "all") + used.map(function (f) {
+      return chip("expo", f, t.fieldNames[f], expoField === f);
+    }).join("");
+
+    document.getElementById("expos").innerHTML =
+      "<h1>" + esc(e.title) + '</h1><p class="g-lead">' + esc(e.lead) + "</p>" +
+      '<div class="filters expo-filters"><div class="filter-row"><span class="filter-label">' + esc(e.filterLabel) +
+        '</span><div class="chips" id="f-expo">' + chips + "</div></div></div>" +
+      '<section class="g-section"><h2>' + esc(e.upcoming) + '</h2><div class="expo-list">' +
+        (upcoming.length ? upcoming.map(function (x) { return expoCard(x, false); }).join("") : '<p class="empty">' + esc(e.none) + "</p>") +
+      "</div></section>" +
+      (past.length ? '<section class="g-section"><h2>' + esc(e.past) + '</h2><div class="expo-list">' +
+        past.map(function (x) { return expoCard(x, true); }).join("") + "</div></section>" : "") +
+      '<section class="g-section"><h2>' + esc(e.tipsTitle) + '</h2><div class="g-block"><ul>' +
+        e.tips.map(function (tip) { return "<li>" + esc(tip) + "</li>"; }).join("") + "</ul></div></section>";
+
+    document.getElementById("f-expo").addEventListener("click", function (ev) {
+      var b = ev.target.closest(".chip");
+      if (!b) return;
+      expoField = b.getAttribute("data-value");
+      renderExpos();
+    });
+  }
+
   // ---------- お問い合わせ ----------
   function renderContact() {
     var c = t.contact;
@@ -503,6 +560,8 @@
       renderIndexStatic(); renderFilters(); renderList(); renderHomeNews();
     } else if (page === "news") {
       renderNews();
+    } else if (page === "expos") {
+      renderExpos();
     } else if (page === "guide") {
       renderGuide();
     } else if (page === "contact") {
